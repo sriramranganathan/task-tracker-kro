@@ -1,0 +1,63 @@
+# TaskTrackerApp Instance Manifest
+# This manifest instantiates the TaskTrackerApp ResourceGraphDefinition with specific values
+# for the demo environment. KRO will use this to create all required AWS and Kubernetes resources.
+
+apiVersion: kro.run/v1alpha1
+kind: TaskTrackerApp
+metadata:
+  name: task-tracker-demo
+  namespace: task-tracker
+  annotations:
+    # Sync wave 2 ensures the RGD is applied first (wave 1)
+    argocd.argoproj.io/sync-wave: "2"
+    # Skip dry run to avoid issues with CRD not being available during ArgoCD's dry-run phase
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+spec:
+  # Target namespace where all resources will be created
+  # This namespace will be created automatically by ArgoCD (CreateNamespace=true sync option)
+  namespace: task-tracker
+
+  # Application name prefix used for resource naming
+  # All resources will be prefixed with this name (e.g., task-tracker-deployment)
+  appName: task-tracker
+
+  # Display title shown in the application UI
+  # This value is injected into the application via ConfigMap
+  appTitle: "Task Tracker"
+
+  # UI theme color (hex color code)
+  # This value is injected into the application via ConfigMap
+  # Change this value to demonstrate dynamic configuration updates with zero downtime
+  themeColor: "#0066cc"
+
+  # AWS Region where resources will be created
+  # To obtain: aws configure get region
+  # Or check your EKS cluster region: aws eks describe-cluster --name <cluster-name> --query cluster.resourcesVpcConfig.vpcId
+  awsRegion: ap-northeast-2
+
+  # AWS Account ID
+  # To obtain: aws sts get-caller-identity --query Account --output text
+  awsAccountId: "408202761791"
+
+  # OIDC Provider ARN for IRSA (IAM Roles for Service Accounts)
+  # This is the existing OIDC provider configured for the EKS cluster
+  # To obtain: aws eks describe-cluster --name <cluster-name> --query "cluster.identity.oidc.issuer" --output text
+  # Then construct ARN: arn:aws:iam::<account-id>:oidc-provider/<oidc-issuer-without-https>
+  # Example: If issuer is https://oidc.eks.ap-northeast-2.amazonaws.com/id/6CA0FD26118846C82AF2ABD7F3550661
+  # Then ARN is: arn:aws:iam::408202761791:oidc-provider/oidc.eks.ap-northeast-2.amazonaws.com/id/6CA0FD26118846C82AF2ABD7F3550661
+  oidcProviderArn: arn:aws:iam::408202761791:oidc-provider/oidc.eks.ap-northeast-2.amazonaws.com/id/6CA0FD26118846C82AF2ABD7F3550661
+
+  # ECR Image URI (without tag)
+  # This is the existing ECR repository where the task-tracker image is stored
+  # To obtain: aws ecr describe-repositories --repository-names task-tracker --query 'repositories[0].repositoryUri' --output text
+  # Format: <account-id>.dkr.ecr.<region>.amazonaws.com/<repository-name>
+  ecrImageUri: 408202761791.dkr.ecr.ap-northeast-2.amazonaws.com/task-tracker
+
+  # Container image tag
+  # To see available tags: aws ecr list-images --repository-name task-tracker --query 'imageIds[*].imageTag' --output table
+  imageTag: latest
+
+  # Number of pod replicas for high availability and zero-downtime updates
+  # Minimum 2 replicas recommended for rolling updates without downtime
+  # When ConfigMap changes, Reloader triggers a rolling restart across all replicas
+  replicas: 2

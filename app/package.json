@@ -1,0 +1,22 @@
+{
+  "name": "task-tracker-demo",
+  "version": "1.0.0",
+  "description": "GitOps demo application - Task Tracker with DynamoDB",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": ["gitops", "argocd", "ack", "kro", "dynamodb", "eks"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0",
+    "express": "^4.18.2",
+    "uuid": "^9.0.1"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

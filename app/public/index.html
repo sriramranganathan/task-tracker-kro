@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Task Tracker - GitOps Demo Application">
+    <title id="page-title">Task Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <h1 id="app-title">Task Tracker</h1>
+            <p class="subtitle">GitOps Demo with ArgoCD, ACK & KRO</p>
+            <div class="region-badge" id="region-badge">Region: Loading...</div>
+        </header>
+
+        <!-- Task Creation Form -->
+        <section class="task-form-section">
+            <h2>Create New Task</h2>
+            <form id="task-form" class="task-form">
+                <div class="form-group">
+                    <label for="task-title">Title <span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        id="task-title" 
+                        name="title" 
+                        placeholder="Enter task title (max 100 characters)"
+                        maxlength="100"
+                        required
+                    >
+                    <span class="char-count" id="title-char-count">0/100</span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="task-description">Description</label>
+                    <textarea 
+                        id="task-description" 
+                        name="description" 
+                        placeholder="Enter task description (max 500 characters)"
+                        maxlength="500"
+                        rows="4"
+                    ></textarea>
+                    <span class="char-count" id="description-char-count">0/500</span>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="submit-btn">
+                    <span class="btn-text">Add Task</span>
+                    <span class="btn-loader" style="display: none;">Adding...</span>
+                </button>
+            </form>
+        </section>
+
+        <!-- Error Message -->
+        <div id="error-message" class="error-message" style="display: none;"></div>
+
+        <!-- Task List -->
+        <section class="task-list-section">
+            <div class="section-header">
+                <h2>Tasks</h2>
+                <span class="task-count" id="task-count">0 tasks</span>
+            </div>
+            
+            <!-- Loading State -->
+            <div id="loading-state" class="loading-state">
+                <div class="spinner"></div>
+                <p>Loading tasks...</p>
+            </div>
+            
+            <!-- Empty State -->
+            <div id="empty-state" class="empty-state" style="display: none;">
+                <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11l3 3L22 4"></path>
+                    <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"></path>
+                </svg>
+                <h3>No tasks yet</h3>
+                <p>Create your first task to get started!</p>
+            </div>
+            
+            <!-- Task List Container -->
+            <div id="task-list" class="task-list"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Powered by AWS EKS • DynamoDB • ArgoCD • ACK • KRO</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
