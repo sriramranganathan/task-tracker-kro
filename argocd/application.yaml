@@ -6,16 +6,12 @@ metadata:
 spec:
   project: default
   source:
-    # TODO: Update this URL with your GitHub repository URL after creating it
-    # Example: https://github.com/YOUR_USERNAME/task-tracker-kro
-    repoURL: https://github.com/YOUR_USERNAME/task-tracker-kro
+    repoURL: https://github.com/sriramranganathan/task-tracker-kro
     targetRevision: HEAD
     path: manifests
   destination:
-    # Update this with your EKS cluster ARN
-    # Example: arn:aws:eks:REGION:ACCOUNT_ID:cluster/CLUSTER_NAME
     server: arn:aws:eks:ap-northeast-2:408202761791:cluster/spoke-prod-1
-    namespace: task-tracker
+    namespace: task-tracker-kro
   syncPolicy:
     automated:
       prune: true

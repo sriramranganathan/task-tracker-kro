@@ -6,7 +6,7 @@ apiVersion: kro.run/v1alpha1
 kind: TaskTrackerApp
 metadata:
   name: task-tracker-demo
-  namespace: task-tracker
+  namespace: task-tracker-kro
   annotations:
     # Sync wave 2 ensures the RGD is applied first (wave 1)
     argocd.argoproj.io/sync-wave: "2"
@@ -15,7 +15,7 @@ metadata:
 spec:
   # Target namespace where all resources will be created
   # This namespace will be created automatically by ArgoCD (CreateNamespace=true sync option)
-  namespace: task-tracker
+  namespace: task-tracker-kro
 
   # Application name prefix used for resource naming
   # All resources will be prefixed with this name (e.g., task-tracker-deployment)
