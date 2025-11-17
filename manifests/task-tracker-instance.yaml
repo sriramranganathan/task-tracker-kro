@@ -18,8 +18,8 @@ spec:
   namespace: task-tracker-kro
 
   # Application name prefix used for resource naming
-  # All resources will be prefixed with this name (e.g., task-tracker-deployment)
-  appName: task-tracker
+  # All resources will be prefixed with this name (e.g., task-tracker-kro-deployment)
+  appName: task-tracker-kro
 
   # Display title shown in the application UI
   # This value is injected into the application via ConfigMap
