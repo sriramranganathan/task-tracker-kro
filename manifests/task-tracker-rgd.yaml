@@ -118,9 +118,9 @@ spec:
           tableName: ${schema.spec.appName}-tasks
           attributeDefinitions:
             - attributeName: taskId
-              attributeType: S
+              attributeType: "S"
             - attributeName: createdAt
-              attributeType: N
+              attributeType: "N"
           keySchema:
             - attributeName: taskId
               keyType: HASH
