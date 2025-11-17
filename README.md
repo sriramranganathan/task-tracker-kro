@@ -132,15 +132,57 @@ List available image tags:
 aws ecr list-images --repository-name task-tracker --query 'imageIds[*].imageTag' --output table
 ```
 
+## Getting Started
+
+### Creating Your GitHub Repository
+
+This project is already initialized as a Git repository with an initial commit. To push it to GitHub:
+
+1. **Create a new repository on GitHub**:
+   - Go to [https://github.com/new](https://github.com/new)
+   - Repository name: `task-tracker-kro` (or your preferred name)
+   - Description: "KRO-based task tracker application with GitOps deployment"
+   - Choose Public or Private
+   - **Do NOT** initialize with README, .gitignore, or license (already exists locally)
+   - Click "Create repository"
+
+2. **Push your local repository to GitHub**:
+```bash
+# Add your GitHub repository as remote
+git remote add origin https://github.com/YOUR_USERNAME/task-tracker-kro.git
+
+# Push to GitHub
+git push -u origin main
+```
+
+3. **Verify the push**:
+   - Visit your GitHub repository URL
+   - Confirm all files are present
+
+### Alternative: Using SSH
+
+If you prefer SSH authentication:
+```bash
+# Add remote using SSH
+git remote add origin git@github.com:YOUR_USERNAME/task-tracker-kro.git
+
+# Push to GitHub
+git push -u origin main
+```
+
 ## Deployment Instructions
 
 ### Step 1: Clone and Configure
 
-1. Clone this repository:
+If you're deploying from an existing GitHub repository:
+
+1. Clone the repository:
 ```bash
 git clone https://github.com/YOUR_USERNAME/task-tracker-kro
 cd task-tracker-kro
 ```
+
+If you just created the repository following the steps above, you're already in the correct directory.
 
 2. Update `manifests/task-tracker-instance.yaml` with your values:
    - `awsRegion`
