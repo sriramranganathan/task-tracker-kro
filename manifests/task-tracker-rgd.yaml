@@ -104,17 +104,8 @@ spec:
                 }
               ]
             }
-
-    - id: policyAttachment
-      template:
-        apiVersion: iam.services.k8s.aws/v1alpha1
-        kind: RolePolicyAttachment
-        metadata:
-          name: ${schema.spec.appName}-policy-attachment
-          namespace: ${schema.spec.namespace}
-        spec:
-          policyARN: ${iamPolicy.status.ackResourceMetadata.arn}
-          roleName: ${iamRole.spec.name}
+          policies:
+            - ${iamPolicy.status.ackResourceMetadata.arn}
 
     - id: dynamodbTable
       template:
