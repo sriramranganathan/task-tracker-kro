@@ -143,8 +143,6 @@ spec:
               value: KRO
 
     - id: serviceAccount
-      dependsOn:
-        - iamRole
       template:
         apiVersion: v1
         kind: ServiceAccount
@@ -168,10 +166,6 @@ spec:
           APP_THEME_COLOR: ${schema.spec.themeColor}
 
     - id: deployment
-      dependsOn:
-        - serviceAccount
-        - configmap
-        - dynamodbTable
       template:
         apiVersion: apps/v1
         kind: Deployment
