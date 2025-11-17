@@ -10,28 +10,17 @@ spec:
     apiVersion: v1alpha1
     kind: TaskTrackerApp
     spec:
-      namespace:
-        type: string
-      appName:
-        type: string
-      appTitle:
-        type: string
-      themeColor:
-        type: string
-      awsRegion:
-        type: string
-      awsAccountId:
-        type: string
-      oidcProviderArn:
-        type: string
-      oidcProviderId:
-        type: string
-      ecrImageUri:
-        type: string
-      imageTag:
-        type: string
-      replicas:
-        type: integer
+      namespace: string
+      appName: string
+      appTitle: string
+      themeColor: string
+      awsRegion: string
+      awsAccountId: string
+      oidcProviderArn: string
+      oidcProviderId: string
+      ecrImageUri: string
+      imageTag: string
+      replicas: integer
 
   resources:
     - id: iamPolicy
