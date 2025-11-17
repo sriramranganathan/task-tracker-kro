@@ -47,6 +47,9 @@ spec:
   # Then ARN is: arn:aws:iam::408202761791:oidc-provider/oidc.eks.ap-northeast-2.amazonaws.com/id/6CA0FD26118846C82AF2ABD7F3550661
   oidcProviderArn: arn:aws:iam::408202761791:oidc-provider/oidc.eks.ap-northeast-2.amazonaws.com/id/6CA0FD26118846C82AF2ABD7F3550661
 
+  # OIDC Provider ID (the part after oidc-provider/)
+  oidcProviderId: oidc.eks.ap-northeast-2.amazonaws.com/id/6CA0FD26118846C82AF2ABD7F3550661
+
   # ECR Image URI (without tag)
   # This is the existing ECR repository where the task-tracker image is stored
   # To obtain: aws ecr describe-repositories --repository-names task-tracker --query 'repositories[0].repositoryUri' --output text

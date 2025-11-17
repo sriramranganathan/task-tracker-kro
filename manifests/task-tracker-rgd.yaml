@@ -10,42 +10,28 @@ spec:
     apiVersion: v1alpha1
     kind: TaskTrackerApp
     spec:
-      type: object
-      properties:
-        namespace:
-          type: string
-          description: "Target namespace for all resources"
-        appName:
-          type: string
-          description: "Application name prefix used for resource naming"
-        appTitle:
-          type: string
-          description: "Display title shown in the application UI"
-          default: "Task Tracker"
-        themeColor:
-          type: string
-          description: "UI theme color in hex format"
-          default: "#0066cc"
-        awsRegion:
-          type: string
-          description: "AWS region where resources will be created"
-        awsAccountId:
-          type: string
-          description: "AWS account ID"
-        oidcProviderArn:
-          type: string
-          description: "OIDC provider ARN for IRSA authentication"
-        ecrImageUri:
-          type: string
-          description: "ECR repository URI for the container image"
-        imageTag:
-          type: string
-          description: "Container image tag"
-          default: "latest"
-        replicas:
-          type: integer
-          description: "Number of pod replicas"
-          default: 2
+      namespace:
+        type: string
+      appName:
+        type: string
+      appTitle:
+        type: string
+      themeColor:
+        type: string
+      awsRegion:
+        type: string
+      awsAccountId:
+        type: string
+      oidcProviderArn:
+        type: string
+      oidcProviderId:
+        type: string
+      ecrImageUri:
+        type: string
+      imageTag:
+        type: string
+      replicas:
+        type: integer
 
   resources:
     - id: iamPolicy
@@ -99,8 +85,8 @@ spec:
                   "Action": "sts:AssumeRoleWithWebIdentity",
                   "Condition": {
                     "StringEquals": {
-                      "${schema.spec.oidcProviderArn | split('/') | last}:sub": "system:serviceaccount:${schema.spec.namespace}:${schema.spec.appName}-sa",
-                      "${schema.spec.oidcProviderArn | split('/') | last}:aud": "sts.amazonaws.com"
+                      "${schema.spec.oidcProviderId}:sub": "system:serviceaccount:${schema.spec.namespace}:${schema.spec.appName}-sa",
+                      "${schema.spec.oidcProviderId}:aud": "sts.amazonaws.com"
                     }
                   }
                 }
