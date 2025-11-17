@@ -2,6 +2,9 @@ apiVersion: kro.run/v1alpha1
 kind: ResourceGraphDefinition
 metadata:
   name: task-tracker-app
+  annotations:
+    # Sync wave 1 ensures the RGD (CRD) is created before the instance
+    argocd.argoproj.io/sync-wave: "1"
 spec:
   schema:
     apiVersion: v1alpha1
