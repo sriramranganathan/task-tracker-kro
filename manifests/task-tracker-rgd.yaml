@@ -46,7 +46,7 @@ spec:
         default: 2
 
   resources:
-    - id: iam-policy
+    - id: iamPolicy
       template:
         apiVersion: iam.services.k8s.aws/v1alpha1
         kind: Policy
@@ -75,7 +75,7 @@ spec:
               ]
             }
 
-    - id: iam-role
+    - id: iamRole
       template:
         apiVersion: iam.services.k8s.aws/v1alpha1
         kind: Role
@@ -105,7 +105,7 @@ spec:
               ]
             }
 
-    - id: policy-attachment
+    - id: policyAttachment
       template:
         apiVersion: iam.services.k8s.aws/v1alpha1
         kind: RolePolicyAttachment
@@ -113,10 +113,10 @@ spec:
           name: ${schema.spec.appName}-policy-attachment
           namespace: ${schema.spec.namespace}
         spec:
-          policyARN: ${iam-policy.status.ackResourceMetadata.arn}
-          roleName: ${iam-role.spec.name}
+          policyARN: ${iamPolicy.status.ackResourceMetadata.arn}
+          roleName: ${iamRole.spec.name}
 
-    - id: dynamodb-table
+    - id: dynamodbTable
       template:
         apiVersion: dynamodb.services.k8s.aws/v1alpha1
         kind: Table
@@ -142,9 +142,9 @@ spec:
             - key: ManagedBy
               value: KRO
 
-    - id: service-account
+    - id: serviceAccount
       dependsOn:
-        - iam-role
+        - iamRole
       template:
         apiVersion: v1
         kind: ServiceAccount
@@ -152,7 +152,7 @@ spec:
           name: ${schema.spec.appName}-sa
           namespace: ${schema.spec.namespace}
           annotations:
-            eks.amazonaws.com/role-arn: ${iam-role.status.ackResourceMetadata.arn}
+            eks.amazonaws.com/role-arn: ${iamRole.status.ackResourceMetadata.arn}
 
     - id: configmap
       template:
@@ -169,9 +169,9 @@ spec:
 
     - id: deployment
       dependsOn:
-        - service-account
+        - serviceAccount
         - configmap
-        - dynamodb-table
+        - dynamodbTable
       template:
         apiVersion: apps/v1
         kind: Deployment
