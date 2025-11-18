@@ -8,6 +8,7 @@ metadata:
 spec:
   schema:
     apiVersion: v1alpha1
+    group: kro.run
     kind: TaskTrackerApp
     spec:
       namespace: string
@@ -195,6 +196,8 @@ spec:
           namespace: ${schema.spec.namespace}
           labels:
             app: ${schema.spec.appName}
+          annotations:
+            service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
         spec:
           type: LoadBalancer
           selector:
