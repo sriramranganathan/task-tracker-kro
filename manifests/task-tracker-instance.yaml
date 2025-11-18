@@ -28,7 +28,9 @@ spec:
   # UI theme color (hex color code)
   # This value is injected into the application via ConfigMap
   # Change this value to demonstrate dynamic configuration updates with zero downtime
-  themeColor: "#0066cc"
+  #themeColor: "#0066cc"
+  themeColor: "#ff6600"
+  
 
   # AWS Region where resources will be created
   # To obtain: aws configure get region
