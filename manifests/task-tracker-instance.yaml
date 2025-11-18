@@ -63,4 +63,4 @@ spec:
   # Number of pod replicas for high availability and zero-downtime updates
   # Minimum 2 replicas recommended for rolling updates without downtime
   # When ConfigMap changes, Reloader triggers a rolling restart across all replicas
-  replicas: 2
+  replicas: 5
